@@ -8,6 +8,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class homeController {
+	
+	private static String username;
+	
+	public void setUsername(String name) {
+		this.username = name;
+	}
+	
 	@RequestMapping("/index")
 	public String home() {
 		return "index.jsp";
@@ -24,9 +31,22 @@ public class homeController {
 	}
 	
 	@RequestMapping("/")
-	@ResponseBody
-	public String page() {
-		return "Login Successfull...!!";
+	public ModelAndView page() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("name",username);
+		mv.setViewName("index.jsp");
+		return mv;
 	}
+	
+	@RequestMapping("/login")
+	public String login() {
+		return "login.jsp";
+	}
+	
+	@RequestMapping("/logout-success")
+	public String logout() {
+		return "logout.jsp";
+	}
+	
 
 }

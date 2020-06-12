@@ -4,12 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
- <link rel="stylesheet" href="/resources/static/css/Answer.css" type="text/css"> 
 <title>Insert title here</title>
 </head>
 <body>
 <h1>
-	Answer = ${ans}
+	Logout Successfully...!!
 </h1>
+<br>
+<br>
+<a href="/login">
+			<input type='button' name='login' value='login'>
+		</a>
 </body>
 </html>

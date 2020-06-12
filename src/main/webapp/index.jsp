@@ -7,11 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<form action="add">
-		<input type="text" name="t1"><br>
-		<input type="text" name="t2"><br>
-		<input type="submit">
-	</form>
+	<h1>
+		Hi ${name} you successfull loged in...
+	</h1>
+	<br>
+	<br>
+	<a href="/logout">
+			<input type='button' name='logout' value='logout'>
+		</a>
 </body>
 </html>
