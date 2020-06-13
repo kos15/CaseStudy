@@ -12,8 +12,9 @@
 </h1>
 <br>
 <br>
-<a href="/login">
+<div class='button'><a href="/login">
 			<input type='button' name='login' value='login'>
-		</a>
+		</a></div>
+
 </body>
 </html>
