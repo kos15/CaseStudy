@@ -1,7 +1,10 @@
 package com.kos.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -93,7 +96,7 @@ public class homeController {
 		customer = customerRepo.findById(id).orElse(null);
 		if(customer == null) {
 			mv.addObject("message", "No record found for ID: "+id);
-			mv.setViewName("updateCustomer.jsp");
+			mv.setViewName("index.jsp");
 			return mv;
 		}
 		customerRepo.deleteById(id);
@@ -102,7 +105,6 @@ public class homeController {
 		customer.setAge(csupdater.getNage());
 		customer.setCustomerName(csupdater.getNcname());
 		customerRepo.save(customer);
-		
 		
 		mv.addObject("success_msg", "Customer Record Updated Successfully....!!");
 		mv.addObject(customer);
@@ -134,6 +136,17 @@ public class homeController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("success_msg", "Customer Record Deleted Successfully....!!");
 		mv.setViewName("/index.jsp");
+		return mv;
+	}
+	
+	@RequestMapping("/statusDetails")
+	public ModelAndView statusDetails() {
+		ModelMap model = new ModelMap();
+		ModelAndView mv = new ModelAndView();
+		List<Customer> customerlist = customerRepo.findAll();
+		model.put("customerList", customerlist);
+		mv.setViewName("statusDetails.jsp");
+		mv.addAllObjects(model);
 		return mv;
 	}
 

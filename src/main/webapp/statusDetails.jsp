@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -109,7 +111,7 @@ body {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#">Link 1</a>
+      <a href="/statusDetails">Customer Status</a>
       <a href="#">Link 2</a>
       <a href="#">Link 3</a>
     </div>
@@ -205,92 +207,44 @@ input[type=submit]:hover {
 </head>
 <body>
 
-<h1 style="color:yellow;" align="center">Update Customer</h1>
-<h2 style="color:red;" align="center" >${message}</h2>
+<h1 style="color:yellow;" align="center">Status Details </h1>
 
+<br><br>
 
-<div class="container">
-  <form action="/updateCustomer" method="post" modelAttribute="update_customer">
-  <div class="row">
-    <div class="col-25">
-      <label for="ssnid">Customer SSN ID</label>
+<div class="container" align="center">
+        <table class="table table-striped" border="2" cellpadding="10" bordercolor="blue">
+            <caption><h3>Customer List</h3></caption>
+            <thead>
+                <tr class="tr tr-success" 
+                	style="border-style:solid; background-color:#f4c430; font-weight:bold;">
+                    <td>CustomerSSNId</td>
+                    <td>CustomerName</td>
+                    <td>Age</td>
+                    <td>Address1</td>
+                    <td>Address2</td>
+                    <td>City</td>
+                    <td>State</td>
+                </tr>   
+            </thead>
+            <tbody>
+                <c:forEach var="cs" items="${customerList}">
+                    <tr>
+                        <td><c:out value="${cs.getCustomerSSNId()}" /></td>
+                        <td><c:out value="${cs.getCustomerName()}" /></td>
+                        <td><c:out value="${cs.getAge()}" /></td>
+                        <td><c:out value="${cs.getAddress1()}" /></td>
+                        <td><c:out value="${cs.getAddress2()}" /></td>
+                        <td><c:out value="${cs.getCity()}" /></td>
+                        <td><c:out value="${cs.getState()}" /></td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
     </div>
-    <div class="col-75">
-      <input type="text" id="ssnid" name="ssnid">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <label for="cid">Customer ID</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="cid" name="cid">
-    </div>
-  </div>
-  
-  <div class="row">
-    <div class="col-25">
-      <label for="ocname">Old Customer Name</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="ocname" name="ocname" value="${customer.getCustomerName()}">
-    </div>
-  </div>
-  
-  
-  <div class="row">
-    <div class="col-25">
-      <label for="ncname">New Customer Name</label>
-    </div>
-    <div class="col-75">
-      <input type="text" placeholder="Enter new customer name..." id="ncname" name="ncname" required>
-    </div>
-  </div>
+    <script src="webjars/jquery/2.2.4/jquery.min.js"></script>
+    <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     
-    
-    <div class="row">
-    <div class="col-25">
-      <label for="oaddr">Old Address</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="oaddr" name="oaddr" value="${customer.getAddress1()}">
-    </div>
-  </div>
-  
-   <div class="row">
-    <div class="col-25">
-      <label for="naddr">New Address</label>
-    </div>
-    <div class="col-75">
-      <input type="text" placeholder="Enter new address..." id="naddr" name="naddr" required>
-    </div>
-  </div>
-  
-  
-  <div class="row">
-    <div class="col-25">
-      <label for="oage">Old Age</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="oger" name="oage" value="${customer.getAge()}">
-    </div>
-  </div>
-  
-  <div class="row">
-    <div class="col-25">
-      <label for="nage">New Age</label>
-    </div>
-    <div class="col-75">
-      <input type="text" placeholder="Enter new age..." id="nage" name="nage" required>
-    </div>
-  </div>
-    <br>
-    
-    <div class="row">
-    <input type="submit" value="Submit">
-  </div>
-  </form>
-</div>
+
   
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
