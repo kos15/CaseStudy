@@ -1,4 +1,4 @@
-package com.kos.demo;
+package com.kos.demo.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

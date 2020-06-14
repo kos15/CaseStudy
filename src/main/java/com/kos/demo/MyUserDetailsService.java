@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.kos.demo.controller.homeController;
+import com.kos.demo.dao.UserRepository;
+import com.kos.demo.model.User;
 @Service
 public class MyUserDetailsService implements UserDetailsService {
 

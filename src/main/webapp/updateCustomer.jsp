@@ -205,74 +205,83 @@ input[type=submit]:hover {
 </head>
 <body>
 
-<h1 style="color:yellow;" align="center">Create Customer</h1>
+<h1 style="color:yellow;" align="center">Update Customer</h1>
 <h2 style="color:red;" align="center" >${message}</h2>
 
 
 <div class="container">
-  <form action="/addCustomer" method="post" modelAttribute="add_customer">
+  <form action="/updateCustomer" method="post" modelAttribute="update_customer">
   <div class="row">
     <div class="col-25">
-      <label for="CustomerSSNId">Customer SSN ID</label>
+      <label for="ssnid">Customer SSN ID</label>
     </div>
     <div class="col-75">
-      <input type="text" id="CustomerSSNId" name="CustomerSSNId" required>
+      <input type="text" id="ssnid" name="ssnid">
     </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="cid">Customer ID</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="cid" name="cid">
+    </div>
+  </div>
   
   <div class="row">
     <div class="col-25">
-      <label for="CustomerName">Customer Name</label>
+      <label for="ocname">Old Customer Name</label>
     </div>
     <div class="col-75">
-      <input type="text" id="CustomerName" name="CustomerName" required>
+      <input type="text" id="ocname" name="ocname" value="${customer.getCustomerName()}">
     </div>
   </div>
   
   
   <div class="row">
     <div class="col-25">
-      <label for="Address1">Address 1</label>
+      <label for="ncname">New Customer Name</label>
     </div>
     <div class="col-75">
-      <input type="text"  id="Address1" name="Address1" required>
+      <input type="text" placeholder="Enter new customer name..." id="ncname" name="ncname" required>
     </div>
   </div>
     
     
     <div class="row">
     <div class="col-25">
-      <label for="Address2">Address 2</label>
+      <label for="oaddr">Old Address</label>
     </div>
     <div class="col-75">
-      <input type="text" id="Address2" name="Address2">
-    </div>
-  </div>
-    
-  
-  <div class="row">
-    <div class="col-25">
-      <label for="Age">Age</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="Age" name="Age" required>
+      <input type="text" id="oaddr" name="oaddr" value="${customer.getAddress1()}">
     </div>
   </div>
   
-  <div class="row">
+   <div class="row">
     <div class="col-25">
-      <label for="City">City</label>
+      <label for="naddr">New Address</label>
     </div>
     <div class="col-75">
-      <input type="text" id="City" name="City" required>
+      <input type="text" placeholder="Enter new address..." id="naddr" name="naddr" required>
+    </div>
+  </div>
+  
+  
+  <div class="row">
+    <div class="col-25">
+      <label for="oage">Old Age</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="oger" name="oage" value="${customer.getAge()}">
     </div>
   </div>
   
   <div class="row">
     <div class="col-25">
-      <label for="State">State</label>
+      <label for="nage">New Age</label>
     </div>
     <div class="col-75">
-      <input type="text" id="State" name="State" required>
+      <input type="text" placeholder="Enter new age..." id="nage" name="nage" required>
     </div>
   </div>
     <br>

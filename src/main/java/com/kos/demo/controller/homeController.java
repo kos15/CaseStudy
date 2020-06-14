@@ -1,21 +1,15 @@
 package com.kos.demo.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kos.demo.Customer;
-import com.kos.demo.CustomerRepository;
+import com.kos.demo.dao.CustomerRepository;
+import com.kos.demo.model.Customer;
+import com.kos.demo.model.CustomerUpdater;
 
 @Controller
 public class homeController {
@@ -25,6 +19,7 @@ public class homeController {
 	private CustomerRepository customerRepo;
 
 	Customer customer = new Customer();
+	
 
 	public void setUsername(String name) {
 		this.username = name;
@@ -70,12 +65,75 @@ public class homeController {
 	 
 
 	@RequestMapping("/addCustomer")
-	public ModelAndView addCustomer(@ModelAttribute("customer") Customer cs) {
+	public ModelAndView addCustomer(@ModelAttribute("add_customer") Customer cs) {
 		System.out.println(cs.toString());
-		customerRepo.save(cs);
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("success_msg", "New Customer Created Successfully....!!");
+		try {
+		customerRepo.save(cs);
+		}catch (Exception e) {
+			mv.addObject("message", "Error: Invalid Entry...");
+			mv.setViewName("addCustomer.jsp");
+			return mv;
+		}
+		mv.addObject("message", "New Customer Created Successfully....!!");
+		mv.setViewName("addCustomer.jsp");
+		return mv;
+	}
+	
+	@RequestMapping("/update")
+	public String updateCustomerRedirect() {
+		return "updateCustomer.jsp";
+	}
+	
+	@RequestMapping("/updateCustomer")
+	public ModelAndView updateCustomer(@ModelAttribute("update_customer") CustomerUpdater csupdater) {
+		System.out.println(csupdater.toString());
+		ModelAndView mv = new ModelAndView();
+		int id = csupdater.getSsnid();
+		customer = customerRepo.findById(id).orElse(null);
+		if(customer == null) {
+			mv.addObject("message", "No record found for ID: "+id);
+			mv.setViewName("updateCustomer.jsp");
+			return mv;
+		}
+		customerRepo.deleteById(id);
+		//Setting new Values to the customer
+		customer.setAddress1(csupdater.getNaddr());
+		customer.setAge(csupdater.getNage());
+		customer.setCustomerName(csupdater.getNcname());
+		customerRepo.save(customer);
+		
+		
+		mv.addObject("success_msg", "Customer Record Updated Successfully....!!");
+		mv.addObject(customer);
 		mv.setViewName("index.jsp");
+		return mv;
+	}
+	
+	@RequestMapping("/delete")
+	public String deleteCustomerRedirect() {
+		return "deleteCustomer.jsp";
+	}
+	
+	@RequestMapping("/deleteCustomer")
+	public ModelAndView deleteCustomer(@RequestParam(name="ssnid")int id) {
+		ModelAndView mv = new ModelAndView();
+		customer=customerRepo.findById(id).orElse(null);
+		mv.setViewName("/confirmDelete.jsp");
+		if(customer == null) {
+			mv.addObject("message", "No record found for ID: "+id);
+			return mv;
+		}
+		mv.addObject(customer);
+		return mv;
+	}
+	
+	@RequestMapping("/confirmDelete")
+	public ModelAndView confirmDelete(@RequestParam(name="ssnid")int id) {
+		customerRepo.deleteById(id);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("success_msg", "Customer Record Deleted Successfully....!!");
+		mv.setViewName("/index.jsp");
 		return mv;
 	}
 

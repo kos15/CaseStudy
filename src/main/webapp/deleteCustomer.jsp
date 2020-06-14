@@ -1,10 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%-- 
     Document   : update
     Created on : 14 Jun, 2020, 1:53:45 PM
     Author     : Ankita
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
@@ -88,8 +89,8 @@ body {
     </button>
     <div class="dropdown-content">
       <a href="/add">Add Customer</a>
-      <a href="#">Delete Customer</a>
-      <a href="/update ">Update Customer</a>
+      <a href="/delete">Delete Customer</a>
+      <a href="/update">Update Customer</a>
     </div>
   </div> 
   
@@ -98,8 +99,8 @@ body {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#">Create Account</a>
-      <a href="#">Delete Account</a>
+      <a href="#add">Create Account</a>
+      <a href="#delete">Delete Account</a>
       <a href="#">Account Status</a>
     </div>
   </div> 
@@ -205,81 +206,23 @@ input[type=submit]:hover {
 </head>
 <body>
 
-<h1 style="color:yellow;" align="center">Create Customer</h1>
-<h2 style="color:red;" align="center" >${message}</h2>
-
+<h1 style="color:yellow;" align="center">Delete Customer</h1>
 
 <div class="container">
-  <form action="/addCustomer" method="post" modelAttribute="add_customer">
+  <form action="/deleteCustomer" post=>
   <div class="row">
     <div class="col-25">
-      <label for="CustomerSSNId">Customer SSN ID</label>
+      <label for="ssnid">Customer SSN ID</label>
     </div>
     <div class="col-75">
-      <input type="text" id="CustomerSSNId" name="CustomerSSNId" required>
-    </div>
-  
-  <div class="row">
-    <div class="col-25">
-      <label for="CustomerName">Customer Name</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="CustomerName" name="CustomerName" required>
-    </div>
-  </div>
-  
-  
-  <div class="row">
-    <div class="col-25">
-      <label for="Address1">Address 1</label>
-    </div>
-    <div class="col-75">
-      <input type="text"  id="Address1" name="Address1" required>
+      <input type="text" id="ssnid" name="ssnid">
     </div>
   </div>
     
-    
-    <div class="row">
-    <div class="col-25">
-      <label for="Address2">Address 2</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="Address2" name="Address2">
-    </div>
-  </div>
-    
-  
-  <div class="row">
-    <div class="col-25">
-      <label for="Age">Age</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="Age" name="Age" required>
-    </div>
+    <div class="row" align="center">
+    <input type="submit" value="Delete">
   </div>
   
-  <div class="row">
-    <div class="col-25">
-      <label for="City">City</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="City" name="City" required>
-    </div>
-  </div>
-  
-  <div class="row">
-    <div class="col-25">
-      <label for="State">State</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="State" name="State" required>
-    </div>
-  </div>
-    <br>
-    
-    <div class="row">
-    <input type="submit" value="Submit">
-  </div>
   </form>
 </div>
   
