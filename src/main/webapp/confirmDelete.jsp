@@ -225,7 +225,7 @@ input[type=submit]:hover {
       <label for="ncname">Customer Name</label>
     </div>
     <div class="col-75">
-      <input type="text" placeholder="Enter customer name..." id="ncname" name="ncname" required value="${customer.getCustomerName() }">
+      <input type="text" placeholder="Enter customer name..." id="ncname" name="ncname" value="${customer.getCustomerName() }">
     </div>
   </div>
   
@@ -234,7 +234,7 @@ input[type=submit]:hover {
       <label for="naddr">Address</label>
     </div>
     <div class="col-75">
-      <input type="text" placeholder="Enter address..." id="naddr" name="naddr" required value="${customer.getAddress1() }">
+      <input type="text" placeholder="Enter address..." id="naddr" name="naddr"  value="${customer.getAddress1() }">
     </div>
   </div>
   
@@ -243,7 +243,7 @@ input[type=submit]:hover {
       <label for="nage">Age</label>
     </div>
     <div class="col-75">
-      <input type="text" placeholder="Enter new age..." id="nage" name="nage" required value="${customer.getAge()}">
+      <input type="text" placeholder="Enter new age..." id="nage" name="nage"  value="${customer.getAge()}">
     </div>
   </div>
     <br>

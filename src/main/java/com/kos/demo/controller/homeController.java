@@ -1,6 +1,7 @@
 package com.kos.demo.controller;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,8 @@ public class homeController {
 	private static String username;
 	@Autowired
 	private CustomerRepository customerRepo;
+	
+	private Random ran = new Random();
 
 	Customer customer = new Customer();
 	
@@ -139,15 +142,5 @@ public class homeController {
 		return mv;
 	}
 	
-	@RequestMapping("/statusDetails")
-	public ModelAndView statusDetails() {
-		ModelMap model = new ModelMap();
-		ModelAndView mv = new ModelAndView();
-		List<Customer> customerlist = customerRepo.findAll();
-		model.put("customerList", customerlist);
-		mv.setViewName("statusDetails.jsp");
-		mv.addAllObjects(model);
-		return mv;
-	}
 
 }

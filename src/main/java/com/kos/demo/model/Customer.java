@@ -26,6 +26,14 @@ public class Customer {
 	private String City;
 	@Column(name="State")
 	private String State;
+	@Column(name="CustomerId")
+	private int CustomerId;
+	public int getCustomerId() {
+		return CustomerId;
+	}
+	public void setCustomerId(int customerId) {
+		CustomerId = customerId;
+	}
 	public int getCustomerSSNId() {
 		return CustomerSSNId;
 	}
@@ -41,11 +49,7 @@ public class Customer {
 	public int getAge() {
 		return Age;
 	}
-	@Override
-	public String toString() {
-		return "Customer [CustomerSSNId=" + CustomerSSNId + ", CustomerName=" + CustomerName + ", Age=" + Age
-				+ ", Address1=" + Address1 + ", Address2=" + Address2 + ", City=" + City + ", State=" + State + "]";
-	}
+	
 	public void setAge(int age) {
 		Age = age;
 	}
@@ -73,6 +77,14 @@ public class Customer {
 	public void setState(String state) {
 		State = state;
 	}
+	@Override
+	public String toString() {
+		return "Customer [CustomerSSNId=" + CustomerSSNId + ", CustomerName=" + CustomerName + ", Age=" + Age
+				+ ", Address1=" + Address1 + ", Address2=" + Address2 + ", City=" + City + ", State=" + State
+				 + "]";
+	}
+	
+	
 	
 }
 //Customer SSN ID, Customer Name, Age, Address Line1, Address Line2, City, State

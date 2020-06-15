@@ -218,6 +218,7 @@ input[type=submit]:hover {
                 <tr class="tr tr-success" 
                 	style="border-style:solid; background-color:#f4c430; font-weight:bold;">
                     <td>CustomerSSNId</td>
+                    <td>CustomerId</td>
                     <td>CustomerName</td>
                     <td>Age</td>
                     <td>Address1</td>
@@ -230,6 +231,7 @@ input[type=submit]:hover {
                 <c:forEach var="cs" items="${customerList}">
                     <tr>
                         <td><c:out value="${cs.getCustomerSSNId()}" /></td>
+                        <td><c:out value="${cs.getCustomerId()}" /></td>
                         <td><c:out value="${cs.getCustomerName()}" /></td>
                         <td><c:out value="${cs.getAge()}" /></td>
                         <td><c:out value="${cs.getAddress1()}" /></td>

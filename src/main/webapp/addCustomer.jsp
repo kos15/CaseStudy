@@ -219,6 +219,8 @@ input[type=submit]:hover {
       <input type="text" id="CustomerSSNId" name="CustomerSSNId" required>
     </div>
   
+  <input type="hidden" id="CustomerId" name="CustomerId">
+  
   <div class="row">
     <div class="col-25">
       <label for="CustomerName">Customer Name</label>
