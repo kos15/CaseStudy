@@ -91,7 +91,7 @@ body {
     <div class="dropdown-content">
       <a href="/add">Add Customer</a>
       <a href="/delete">Delete Customer</a>
-      <a href="/update ">Update Customer</a>
+      <a href="/update">Update Customer</a>
     </div>
   </div> 
   
@@ -100,9 +100,9 @@ body {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#">Create Account</a>
-      <a href="#">Delete Account</a>
-      <a href="#">Account Status</a>
+      <a href="/addAccount">Create Account</a>
+      <a href="/deleteAcc">Delete Account</a>
+      <a href="/statusAccount">Account Status</a>
     </div>
   </div> 
   
@@ -111,7 +111,7 @@ body {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="/statusDetails">Customer Status</a>
+      <a href="/statusCustomer">Customer Status</a>
       <a href="#">Link 2</a>
       <a href="#">Link 3</a>
     </div>
@@ -209,7 +209,6 @@ input[type=submit]:hover {
 
 <h1 style="color:yellow;" align="center">Status Details </h1>
 
-<br><br>
 
 <div class="container" align="center">
         <table class="table table-striped" border="2" cellpadding="10" bordercolor="blue">

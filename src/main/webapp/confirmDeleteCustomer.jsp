@@ -80,7 +80,7 @@ body {
 </style>
 <body>
 
-<div class="navbar">
+<<div class="navbar">
 <h2 style="color:yellow;">FedChoice<span style="color:white;"> Bank</span><h2>
   <a href="/index">Home</a>
   <div class="dropdown">
@@ -99,9 +99,9 @@ body {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#add">Create Account</a>
-      <a href="#delete">Delete Account</a>
-      <a href="#">Account Status</a>
+      <a href="/addAccount">Create Account</a>
+      <a href="/deleteAcc">Delete Account</a>
+      <a href="/statusAccount">Account Status</a>
     </div>
   </div> 
   
@@ -110,7 +110,7 @@ body {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="/statusDetails">Customer Status</a>
+      <a href="/statusCustomer">Customer Status</a>
       <a href="#">Link 2</a>
       <a href="#">Link 3</a>
     </div>
@@ -130,7 +130,6 @@ body {
   <a href="/logout">Logout</a>
   
 </div>
-
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -207,10 +206,11 @@ input[type=submit]:hover {
 <body>
 
 <h1 style="color:yellow;" align="center">Delete Customer</h1>
-<h2 style="color:red;" align="center" >${message}</h2>
+<h2 align="center" style="color:green">${message}</h2>
+<h2 align="center" style="color:red">${er_message}</h2>
 
 <div class="container">
-  <form action="/confirmDelete" post=>
+  <form action="/confirmDelete">
   <div class="row">
     <div class="col-25">
       <label for="ssnid">Customer SSN ID</label>

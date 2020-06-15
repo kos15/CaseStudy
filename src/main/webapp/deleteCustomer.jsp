@@ -99,9 +99,9 @@ body {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#add">Create Account</a>
-      <a href="#delete">Delete Account</a>
-      <a href="#">Account Status</a>
+      <a href="/addAccount">Create Account</a>
+      <a href="/deleteAcc">Delete Account</a>
+      <a href="/statusAccount">Account Status</a>
     </div>
   </div> 
   
@@ -110,7 +110,7 @@ body {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="/statusDetails">Customer Status</a>
+      <a href="/statusCustomer">Customer Status</a>
       <a href="#">Link 2</a>
       <a href="#">Link 3</a>
     </div>

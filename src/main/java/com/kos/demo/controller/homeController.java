@@ -124,7 +124,7 @@ public class homeController {
 	public ModelAndView deleteCustomer(@RequestParam(name="ssnid")int id) {
 		ModelAndView mv = new ModelAndView();
 		customer=customerRepo.findById(id).orElse(null);
-		mv.setViewName("/confirmDelete.jsp");
+		mv.setViewName("/confirmDeleteCustomer.jsp");
 		if(customer == null) {
 			mv.addObject("message", "No record found for ID: "+id);
 			return mv;
@@ -135,12 +135,18 @@ public class homeController {
 	
 	@RequestMapping("/confirmDelete")
 	public ModelAndView confirmDelete(@RequestParam(name="ssnid")int id) {
-		customerRepo.deleteById(id);
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("success_msg", "Customer Record Deleted Successfully....!!");
-		mv.setViewName("/index.jsp");
+		try{customerRepo.deleteById(id);}
+		catch(Exception e){
+			mv.addObject("er_message", "Error deleting Record");
+			mv.setViewName("/confirmDeleteCustomer.jsp");
+			return mv;
+		}
+		mv.addObject("message", "Customer Record Deleted Successfully....!!");
+		mv.setViewName("/confirmDeleteCustomer.jsp");
 		return mv;
 	}
+	
 	
 
 }
