@@ -8,8 +8,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kos.demo.dao.AccountsRepository;
+import com.kos.demo.dao.AccountStatusRepository;
 import com.kos.demo.dao.CustomerRepository;
+import com.kos.demo.model.AccountStatus;
 import com.kos.demo.model.Accounts;
 import com.kos.demo.model.Customer;
 
@@ -17,9 +18,9 @@ import com.kos.demo.model.Customer;
 public class statusController {
 	
 	@Autowired
-	CustomerRepository customerRepo;
+	private CustomerRepository customerRepo;
 	@Autowired
-	private AccountsRepository accountRepo;
+	private AccountStatusRepository accountStatusRepo;
 
 	@RequestMapping("/statusCustomer")
 	public ModelAndView statusDetails() {
@@ -37,7 +38,7 @@ public class statusController {
 		ModelMap model = new ModelMap();
 		ModelAndView mv = new ModelAndView();
 		try {
-			List<Accounts> accountList = accountRepo.findAll();
+			List<AccountStatus> accountList = accountStatusRepo.findAll();
 			System.out.println(accountList);
 			model.put("accountList", accountList);
 			mv.addAllObjects(model);

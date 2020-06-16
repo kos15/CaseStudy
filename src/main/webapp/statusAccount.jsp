@@ -222,21 +222,25 @@ input[type=submit]:hover {
             <thead>
                 <tr class="tr tr-success" 
                 	style="border-style:solid; background-color:#f4c430; font-weight:bold;">
-                    <td>AccountId</td>
                     <td>CustomerSSNId</td>
+                    <td>AccountId</td>
                     <td>AccountType</td>
-                    <td>DepositeAmount</td>
-                    <td>AccountCreated</td>
+                    <td>AccountStatus</td>
+                    <td>Message</td>
+                    <td>LastUpdated</td>
+                    <td>Operations</td>
                 </tr>   
             </thead>
             <tbody>
                 <c:forEach var="acc" items="${accountList}">
                     <tr>
-                        <td><c:out value="${acc.getAccountId()}" /></td>
                         <td><c:out value="${acc.getCustomerSSNId()}" /></td>
+                        <td><c:out value="${acc.getAccountId()}" /></td>
                         <td><c:out value="${acc.getAccountType()}" /></td>
-                        <td><c:out value="${acc.getDepositeAmount()}" /></td>
-                        <td><c:out value="${acc.getAccountCreated()}" /></td>
+                        <td><c:out value="${acc.getAccountStatus()}" /></td>
+                        <td><c:out value="${acc.getMessage()}" /></td>
+                        <td><c:out value="${acc.getLastUpdated()}" /></td>
+                        <td><a href="/statusAccount">Refresh</a></td>
                     </tr>
                 </c:forEach>
             </tbody>

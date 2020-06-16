@@ -219,7 +219,7 @@ input[type=submit]:hover {
       <input type="text" id="CustomerSSNId" name="CustomerSSNId" required>
     </div>
   
-  <input type="hidden" id="CustomerId" name="CustomerId">
+  <input type="hidden" id="CustomerId" name="CustomerId" value=0>
   
   <div class="row">
     <div class="col-25">

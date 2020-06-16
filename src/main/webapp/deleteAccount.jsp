@@ -209,7 +209,7 @@ input[type=submit]:hover {
 <h2 align="center" style="color:red">${er_message}</h2>
 
 <div class="container">
-  <form action="/deleteAccount" modelAttribute="deleteacc" method="post">
+  <form action="deleteAccount" modelAttribute="deleteacc" method="post">
   
   <div class="row">
     <div class="col-25">

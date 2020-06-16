@@ -6,6 +6,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -81,7 +82,7 @@ public class accountController {
 				mv.setViewName("deleteAccount.jsp");
 				return mv;
 			}else {
-				mv.addObject(acc);
+				mv.addObject("acc", acc);
 				mv.setViewName("confirmDeleteAccount.jsp");
 				return mv;
 			}
@@ -107,7 +108,76 @@ public class accountController {
 		return mv;
 	}
 
+	@RequestMapping("/depositRedirect")
+	public ModelAndView deposite() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("deposit.jsp");
+		return mv;
+	}
 	
+	@RequestMapping("/deposit")
+	public ModelAndView depositeMoney(@ModelAttribute(name="deposit")Accounts account) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("deposit.jsp");
+		System.out.println(account.toString());
+		acc = accountRepo.findById(account.getAccountId()).orElse(null);
+		if(acc.getAccountId() == 0) {
+			mv.addObject("er_message", "No Account for Specified AccountID");
+			return mv;
+		}else if(!acc.checkType(account)) {
+			mv.addObject("er_message", "Account Type mismatch...");
+			return mv;
+		}
+		else {
+			try {
+				accountRepo.deleteById(account.getAccountId());
+				acc.setBalance(acc.getBalance() + account.getDepositeAmount());
+				accountRepo.save(acc);
+				mv.addObject("message", "Money Deposited Successfully..");
+				mv.addObject("balance", "Current Balance :" + acc.getBalance());
+				return mv;
+			}catch(Exception e) {
+				mv.addObject("er_message", "Error while depositing money...");
+				return mv;
+			}
+		}
+	}
 	
+	@RequestMapping("/withdrawRedirect")
+	public ModelAndView withdraw() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("withdraw.jsp");
+		return mv;
+	}
+	
+	@RequestMapping("/withdraw")
+	public ModelAndView withdrawMoney(@ModelAttribute(name="withdraw")Accounts account) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("withdraw.jsp");
+		acc = accountRepo.findById(account.getAccountId()).orElse(null);
+		if(acc.getAccountId() == 0) {
+			mv.addObject("er_message", "No Account for Specified AccountID");
+			return mv;
+		}else if(!acc.checkType(account)) {
+			mv.addObject("er_message", "Account Type mismatch...");
+			return mv;
+		}else if((acc.getBalance() - account.getDepositeAmount()) < 0) {
+			mv.addObject("er_message", "Insufficient Balance..");
+			return mv;
+		}
+		else {
+			try {
+				accountRepo.deleteById(acc.getAccountId());
+				acc.setBalance(acc.getBalance() - account.getDepositeAmount());
+				accountRepo.save(acc);
+				mv.addObject("message", "Money Withdraw Successfully..");
+				mv.addObject("balance", "Current Balance :" + acc.getBalance());
+				return mv;
+			}catch(Exception e) {
+				mv.addObject("er_message", "Error while Withdrawing money...");
+				return mv;
+			}
+		}
+	}
 
 }

@@ -204,13 +204,13 @@ input[type=submit]:hover {
 </head>
 <body>
 
-<h1 style="color:yellow;" align="center">Delete Account</h1>
+<h1 style="color:yellow;" align="center">Withdraw Money</h1>
 <br><br>
 <h2 align="center" style="color:green">${message}</h2>
 <h2 align="center" style="color:red">${er_message}</h2>
 
 <div class="container">
-  <form action="confirmDeleteAccount"  method="get">
+  <form action="withdraw" modelAttribute="withdraw" method="post" id="myForm">
   
   <div class="row">
     <div class="col-25">
@@ -218,7 +218,7 @@ input[type=submit]:hover {
     </div>
     <div class="col-75">
     
-       <input type="text" placeholder="Enter account id..." id="AccountId" name="AccountId" value=${acc.getAccountId() }>
+       <input type="text" placeholder="Enter account id..." id="AccountId" name="AccountId" required>
     </div>
   </div>
    
@@ -230,7 +230,7 @@ input[type=submit]:hover {
       
     
     <div class="col-75">
-    <select name="AccountType" id="AccountType" value= ${acc.getAccountType() }>
+    <select name="AccountType" id="AccountType">
     <option value="Current Account">Current Account</option>
     <option value="Savings Account">Savings Account</option>
   </select>
@@ -238,11 +238,42 @@ input[type=submit]:hover {
     </div>
   </div>
   
+  
+  
+  <div class="row">
+    <div class="col-25">
+      <label for="DepositeAmount">Withdraw Amount</label>
+    </div>
+    <div class="col-75">
+      <input type="text" placeholder="Enter withdraw amount..." id="DepositeAmount" name="DepositeAmount" required>
+    </div>
+  </div>
     <br>
     
-    <div class="row">
-    <input type="submit" value="Delete">
-    <a href="/index.jsp"><input type="button" value="Cancel" style="color:red"></a>
+			<script>
+				function myFunction() {
+							
+							if(confirm("Withdraw Amount: "+document.getElementById("DepositeAmount").value)) {
+								document.getElementById("myForm").submit();
+								return true
+							} else {
+								window.location.href="withdraw.jsp";
+								return false;
+							}
+					}
+					function check(){
+							if(document.getElementById("DepositeAmount").value<=0){
+								alert('Invalid Amount');
+								returnToPreviousPage();
+								return false;
+							}else{
+								return true;
+							}
+						}
+			</script>
+
+			<div class="row">
+    <input type="submit" value="Submit" onclick="event.preventDefault(); var temp = check();myFunction(); return temp;">
   </div>
   </form>
 </div>

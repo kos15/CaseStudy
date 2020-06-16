@@ -26,7 +26,7 @@ public class Customer {
 	private String City;
 	@Column(name="State")
 	private String State;
-	@Column(name="CustomerId")
+	@Column(name="CustomerID")
 	private int CustomerId;
 	public int getCustomerId() {
 		return CustomerId;

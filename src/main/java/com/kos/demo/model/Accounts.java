@@ -83,5 +83,12 @@ public class Accounts {
 		else
 			return false;
 	}
+	
+	public boolean checkType(Accounts acc) {
+		if(this.AccountType.equals(acc.getAccountType()))
+			return true;
+		else
+			return false;
+	}
 
 }
