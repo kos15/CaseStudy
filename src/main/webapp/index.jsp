@@ -111,7 +111,6 @@ body {
     <div class="dropdown-content">
       <a href="/statusCustomer">Customer Status</a>
       <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
     </div>
   </div> 
   
@@ -122,7 +121,8 @@ body {
     <div class="dropdown-content">
       <a href="/depositRedirect">Deposit Money</a>
       <a href="/withdrawRedirect">Withdraw Money</a>
-      <a href="#">Link 3</a>
+      <a href="/transferRedirect">Transfer Money</a>
+      <a href="/statement">Account Statement</a>
     </div>
   </div> 
   

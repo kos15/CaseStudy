@@ -110,7 +110,6 @@ body {
     <div class="dropdown-content">
       <a href="/statusCustomer">Customer Status</a>
       <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
     </div>
   </div> 
   
@@ -119,9 +118,10 @@ body {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#">Link 1</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
+      <a href="/depositRedirect">Deposit Money</a>
+      <a href="/withdrawRedirect">Withdraw Money</a>
+      <a href="/transferRedirect">Transfer Money</a>
+      <a href="/statement">Account Statement</a>
     </div>
   </div> 
   
@@ -214,11 +214,11 @@ input[type=submit]:hover {
   
   <div class="row">
     <div class="col-25">
-      <label for="cid">Customer ID</label>
+      <label for="cid">Customer SSN Id</label>
     </div>
     <div class="col-75">
     
-       <input type="text" placeholder="Enter customer id..." id="CustomerSSNId" name="CustomerSSNId" required>
+       <input type="text" placeholder="Enter customer ssnid..." id="CustomerSSNId" name="CustomerSSNId" required>
     </div>
   </div>
    

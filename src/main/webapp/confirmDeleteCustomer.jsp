@@ -80,7 +80,7 @@ body {
 </style>
 <body>
 
-<<div class="navbar">
+<div class="navbar">
 <h2 style="color:yellow;">FedChoice<span style="color:white;"> Bank</span><h2>
   <a href="/index">Home</a>
   <div class="dropdown">
@@ -112,7 +112,6 @@ body {
     <div class="dropdown-content">
       <a href="/statusCustomer">Customer Status</a>
       <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
     </div>
   </div> 
   
@@ -121,16 +120,16 @@ body {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#">Link 1</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
+      <a href="/depositRedirect">Deposit Money</a>
+      <a href="/withdrawRedirect">Withdraw Money</a>
+      <a href="/transferRedirect">Transfer Money</a>
+      <a href="/statement">Account Statement</a>
     </div>
   </div> 
   
   <a href="/logout">Logout</a>
   
 </div>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {

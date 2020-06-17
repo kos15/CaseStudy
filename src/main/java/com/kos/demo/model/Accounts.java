@@ -90,5 +90,30 @@ public class Accounts {
 		else
 			return false;
 	}
+	
+	public boolean isWithdrawable(Accounts acc,float amount) {
+		if(this.AccountId == 0) {
+			return false;
+		}else if(!this.checkType(acc)) {
+			return false;
+		}
+		else
+			return true;
+	}
 
+	public boolean isDepositable(Accounts acc) {
+		if (this.getAccountId() == 0) {
+			return false;
+		} else if (!this.checkType(acc)) {
+			return false;
+		} else
+			return true;
+	}
+	
+	public boolean isBalanceSufficient(float amount) {
+		if((this.Balance - amount) < 0) {
+			return false;
+		}else
+			return true;
+	}
 }

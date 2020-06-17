@@ -204,13 +204,13 @@ input[type=submit]:hover {
 </head>
 <body>
 
-<h1 style="color:yellow;" align="center">Deposit Money</h1>
+<h1 style="color:yellow;" align="center">Account Statement</h1>
 <br><br>
 <h2 align="center" style="color:green">${message}</h2>
 <h2 align="center" style="color:red">${er_message}</h2>
 
 <div class="container">
-  <form action="/deposit" modelAttribute="deposit" method="post">
+  <form action="accountStatement" modelAttribute="statement" method="post" id="myForm">
   
   <div class="row">
     <div class="col-25">
@@ -237,33 +237,9 @@ input[type=submit]:hover {
       
     </div>
   </div>
-  
-  
-  
-  <div class="row">
-    <div class="col-25">
-      <label for="DepositeAmount">Deposite Amount</label>
-    </div>
-    <div class="col-75">
-      <input type="text" placeholder="Enter deposite amount..." id="DepositeAmount" name="DepositeAmount" required>
-    </div>
-  </div>
-    <br>
-    
-			<script>
-				function myFunction() {
-					if (confirm("Deposit Amount: "+document.getElementById("DepositeAmount").value)) {
-						return true
-					} else {
-						window.location.href="deposit.jsp";
-						return false;
-					}
-
-				}
-			</script>
 
 			<div class="row">
-    <input type="submit" value="Submit" onclick="myFunction()">
+    <input type="submit" value="Submit" >
   </div>
   </form>
 </div>

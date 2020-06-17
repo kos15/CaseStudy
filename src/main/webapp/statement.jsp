@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -204,69 +207,45 @@ input[type=submit]:hover {
 </head>
 <body>
 
-<h1 style="color:yellow;" align="center">Deposit Money</h1>
-<br><br>
-<h2 align="center" style="color:green">${message}</h2>
-<h2 align="center" style="color:red">${er_message}</h2>
+<h1 style="color:yellow;" align="center">Statement </h1>
 
-<div class="container">
-  <form action="/deposit" modelAttribute="deposit" method="post">
-  
-  <div class="row">
-    <div class="col-25">
-      <label for="AccountId">Account ID</label>
-    </div>
-    <div class="col-75">
-    
-       <input type="text" placeholder="Enter account id..." id="AccountId" name="AccountId" required>
-    </div>
-  </div>
-   
- 
-   <div class="row">
-    <div class="col-25">
-      <label for="at">Account type</label>
-      </div>
-      
-    
-    <div class="col-75">
-    <select name="AccountType" id="AccountType">
-    <option value="Current Account">Current Account</option>
-    <option value="Savings Account">Savings Account</option>
-  </select>
-      
-    </div>
-  </div>
-  
-  
-  
-  <div class="row">
-    <div class="col-25">
-      <label for="DepositeAmount">Deposite Amount</label>
-    </div>
-    <div class="col-75">
-      <input type="text" placeholder="Enter deposite amount..." id="DepositeAmount" name="DepositeAmount" required>
-    </div>
-  </div>
-    <br>
-    
-			<script>
-				function myFunction() {
-					if (confirm("Deposit Amount: "+document.getElementById("DepositeAmount").value)) {
-						return true
-					} else {
-						window.location.href="deposit.jsp";
-						return false;
-					}
+<br>
 
-				}
-			</script>
 
-			<div class="row">
-    <input type="submit" value="Submit" onclick="myFunction()">
-  </div>
-  </form>
-</div>
+<br>
+
+<div class="container" align="center">
+<h2 style="color:green">${message}</h2>
+
+        <table class="table table-striped" border="2" cellpadding="10" bordercolor="blue">
+            <caption><h3>Account Statement</h3></caption>
+            <thead>
+                <tr class="tr tr-success" 
+                	style="border-style:solid; background-color:#f4c430; font-weight:bold;">
+                    <td>Transaction ID</td>
+                    <td>Description</td>
+                    <td>Amount</td>
+                    <td>Time</td>
+                    
+                </tr>   
+            </thead>
+            <tbody>
+                <c:forEach var="acc" items="${statement}">
+                    <tr>
+                        <td><c:out value="${acc.getTID()}" /></td>
+                        <td><c:out value="${acc.getDesc()}" /></td>
+                        <td><c:out value="${acc.getAmount()}" /></td>
+                        <td><c:out value="${acc.getDate()}" /></td>
+                        <td><a href="accountStatement">Refresh</a></td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
+    <script src="webjars/jquery/2.2.4/jquery.min.js"></script>
+    <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
+
   
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>

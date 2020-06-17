@@ -204,33 +204,33 @@ input[type=submit]:hover {
 </head>
 <body>
 
-<h1 style="color:yellow;" align="center">Deposit Money</h1>
+<h1 style="color:yellow;" align="center">Transfer Money</h1>
 <br><br>
 <h2 align="center" style="color:green">${message}</h2>
 <h2 align="center" style="color:red">${er_message}</h2>
 
 <div class="container">
-  <form action="/deposit" modelAttribute="deposit" method="post">
+  <form action="transfer" method="post" id="myForm">
   
   <div class="row">
     <div class="col-25">
-      <label for="AccountId">Account ID</label>
+      <label for="SenderAccId">Sender Account ID</label>
     </div>
     <div class="col-75">
     
-       <input type="text" placeholder="Enter account id..." id="AccountId" name="AccountId" required>
+       <input type="text" placeholder="Enter sender account id..." id="SenderAccId" name="SenderAccId" required>
     </div>
   </div>
    
  
    <div class="row">
     <div class="col-25">
-      <label for="at">Account type</label>
+      <label for="at">Sender Account type</label>
       </div>
       
     
     <div class="col-75">
-    <select name="AccountType" id="AccountType">
+    <select name="SenderAccountType" id="SenderAccountType">
     <option value="Current Account">Current Account</option>
     <option value="Savings Account">Savings Account</option>
   </select>
@@ -238,32 +238,66 @@ input[type=submit]:hover {
     </div>
   </div>
   
-  
+  <div class="row">
+    <div class="col-25">
+      <label for="ReciverAccId">Reciver Account ID</label>
+    </div>
+    <div class="col-75">
+    
+       <input type="text" placeholder="Enter reciver account id..." id="ReciverAccId" name="ReciverAccId" required>
+    </div>
+  </div>
+   
+ 
+   <div class="row">
+    <div class="col-25">
+      <label for="at">Reciver Account type</label>
+      </div>
+      
+    
+    <div class="col-75">
+    <select name="ReciverAccountType" id="ReciverAccountType">
+    <option value="Current Account">Current Account</option>
+    <option value="Savings Account">Savings Account</option>
+  </select>
+      
+    </div>
+  </div>
   
   <div class="row">
     <div class="col-25">
-      <label for="DepositeAmount">Deposite Amount</label>
+      <label for="TransferAmount">Transfer Amount</label>
     </div>
     <div class="col-75">
-      <input type="text" placeholder="Enter deposite amount..." id="DepositeAmount" name="DepositeAmount" required>
+      <input type="text" placeholder="Enter withdraw amount..." id="TransferAmount" name="TransferAmount" required>
     </div>
   </div>
     <br>
     
 			<script>
 				function myFunction() {
-					if (confirm("Deposit Amount: "+document.getElementById("DepositeAmount").value)) {
-						return true
-					} else {
-						window.location.href="deposit.jsp";
-						return false;
+							
+							if(confirm("Transfer Amount: "+document.getElementById("TransferAmount").value)) {
+								document.getElementById("myForm").submit();
+								return true
+							} else {
+								window.location.href="transfer.jsp";
+								return false;
+							}
 					}
-
-				}
+					function check(){
+							if(document.getElementById("TransferAmount").value<=0){
+								alert('Invalid Amount');
+								returnToPreviousPage();
+								return false;
+							}else{
+								return true;
+							}
+						}
 			</script>
 
 			<div class="row">
-    <input type="submit" value="Submit" onclick="myFunction()">
+    <input type="submit" value="Submit" onclick="event.preventDefault(); var temp = check();myFunction(); return temp;">
   </div>
   </form>
 </div>
