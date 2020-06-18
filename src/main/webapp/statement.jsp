@@ -214,10 +214,41 @@ input[type=submit]:hover {
 
 <br>
 
-<div class="container" align="center">
+<div class="container" align="center" id="StatementTable">
 <h2 style="color:green">${message}</h2>
+<script>
+function Download(){
+	var pdf = new jsPDF('p', 'pt', 'letter');
+	source = $('#StatementTable')[0];
+	specialElementHandlers = {
+		'#bypassme': function(element, renderer){
+			return true
+		}
+	}
+	margins = {
+	    top: 50,
+	    left: 60,
+	    width: 545
+	  };
+	pdf.fromHTML(
+	  	source // HTML string or DOM elem ref.
+	  	, margins.left // x coord
+	  	, margins.top // y coord
+	  	, {
+	  		'width': margins.width // max width of content on PDF
+	  		, 'elementHandlers': specialElementHandlers
+	  	},
+	  	function (dispose) {
+	  	  // dispose: object with X, Y of the last line add to the PDF
+	  	  //          this allow the insertion of new lines after html
+	        pdf.save('Statement.pdf');
+	      }
+	  )		
+	}
+</script>
+<input type="button" style="color:green" value="Download Account Statement" onclick="Download()"></input>
 
-        <table class="table table-striped" border="2" cellpadding="10" bordercolor="blue">
+        <table class="table table-striped" border="2" cellpadding="10" bordercolor="blue" >
             <caption><h3>Account Statement</h3></caption>
             <thead>
                 <tr class="tr tr-success" 
@@ -226,7 +257,7 @@ input[type=submit]:hover {
                     <td>Description</td>
                     <td>Amount</td>
                     <td>Time</td>
-                    
+                    <td>Operation</td>
                 </tr>   
             </thead>
             <tbody>
@@ -244,6 +275,8 @@ input[type=submit]:hover {
     </div>
     <script src="webjars/jquery/2.2.4/jquery.min.js"></script>
     <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
 
   
@@ -322,4 +355,6 @@ body {
 
 
 </body>
+
+
 </html>
