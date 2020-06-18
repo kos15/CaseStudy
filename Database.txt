@@ -1,0 +1,183 @@
+Database Type: mysql
+Database Version: mysql-sever 8.0.20-0
+Database Name: Bank
+
+
+Number of tables present inside Bank Database
+
+mysql> show tables;
++----------------+
+| Tables_in_Bank |
++----------------+
+| AccountStatus  |
+| Accounts       |
+| Customer       |
+| Transactions   |
+| User           |
++----------------+
+
+
+Schema for individual Tables
+1) AccountStatus
+mysql> desc AccountStatus;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| CustomerSSNId | int         | NO   | PRI | NULL    |       |
+| AccountId     | int         | YES  |     | NULL    |       |
+| AccountType   | varchar(20) | YES  |     | NULL    |       |
+| AccountStatus | varchar(9)  | YES  |     | NULL    |       |
+| Message       | varchar(40) | YES  |     | NULL    |       |
+| LastUpdated   | datetime    | NO   |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+
+2) Accounts
+mysql> desc Accounts;
++----------------+-------------+------+-----+-------------------+-------------------+
+| Field          | Type        | Null | Key | Default           | Extra             |
++----------------+-------------+------+-----+-------------------+-------------------+
+| AccountId      | int         | NO   | PRI | NULL              | auto_increment    |
+| CustomerSSNId  | int         | NO   |     | NULL              |                   |
+| AccountType    | varchar(20) | NO   |     | NULL              |                   |
+| DepositeAmount | float(10,3) | YES  |     | NULL              |                   |
+| AccountCreated | datetime    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| Balance        | float(10,2) | NO   |     | 0.0               | DEFAULT_GENERATED |
++----------------+-------------+------+-----+-------------------+-------------------+
+
+3) Customer
+mysql> desc Customer;
++---------------+-------------+------+-----+---------+----------------+
+| Field         | Type        | Null | Key | Default | Extra          |
++---------------+-------------+------+-----+---------+----------------+
+| CustomerSSNId | int         | NO   | PRI | NULL    |                |
+| CustomerID    | int         | NO   | UNI | NULL    | auto_increment |
+| CustomerName  | varchar(30) | YES  |     | NULL    |                |
+| Age           | int         | YES  |     | NULL    |                |
+| Address1      | varchar(50) | YES  |     | NULL    |                |
+| Address2      | varchar(50) | YES  |     | NULL    |                |
+| City          | varchar(30) | YES  |     | NULL    |                |
+| State         | varchar(30) | YES  |     | NULL    |                |
++---------------+-------------+------+-----+---------+----------------+
+
+4)Transactions
+mysql> desc Transactions;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| TID          | int         | NO   | PRI | NULL    | auto_increment |
+| SenderAccId  | int         | YES  |     | NULL    |                |
+| ReciverAccId | int         | YES  |     | NULL    |                |
+| Amount       | float(10,2) | NO   |     | NULL    |                |
+| Time         | datetime    | NO   |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+
+5) User
+mysql> desc User;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| uid      | int         | NO   | PRI | NULL    |       |
+| username | varchar(20) | YES  |     | NULL    |       |
+| password | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+
+
+Triggers present in Bank Database
+
+1) after_customer_insert
+2) after_accounts_insert
+
+*************************** 1. row ***************************
+             Trigger: after_account_insert
+               Event: INSERT
+               Table: Accounts
+           Statement: update AccountStatus set AccountId=NEW.AccountId, 
+           		      AccountType=NEW.AccountType, AccountStatus="Active", 
+           		      Message="Account Created Successfully..", 
+           		      LastUpdated=CURRENT_TIMESTAMP where AccountStatus.CustomerSSNId=NEW.CustomerSSNId
+              Timing: AFTER
+             Created: 2020-06-17 19:34:36.36
+            sql_mode: ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+             Definer: root@localhost
+character_set_client: utf8mb4
+collation_connection: utf8mb4_0900_ai_ci
+  Database Collation: utf8mb4_0900_ai_ci
+  
+*************************** 2. row ***************************
+             Trigger: after_customer_insert
+               Event: INSERT
+               Table: Customer
+           Statement: insert into Bank.AccountStatus(CustomerSSNID,AccountID,AccountType,
+           				AccountStatus,Message,LastUpdated) 
+           				values(new.CustomerSSNID,0,"","Pending","Customer Created successfully",CURRENT_TIMESTAMP)
+              Timing: AFTER
+             Created: 2020-06-17 19:23:55.58
+            sql_mode: ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+             Definer: root@localhost
+character_set_client: utf8mb4
+collation_connection: utf8mb4_0900_ai_ci
+  Database Collation: utf8mb4_0900_ai_ci
+
+User table entry inside Bank database
+Credentials use for logging into website
+
+mysql> select * from User;
++-----+----------+--------------+
+| uid | username | password     |
++-----+----------+--------------+
+| 101 | Koustubh | Koustubh@91  |
+| 102 | Ganesh   | Ganesh@123   |
+| 103 | Priyanka | Priyanka@123 |
+| 104 | Ankita   | Ankita@123   |
+| 105 | Ritesh   | Ritesh@123   |
++-----+----------+--------------+
+
+Customer table entry
+table countains records of every customer registered to Bank
+mysql> select * from Customer;
++---------------+------------+-------------------+------+---------------------------+--------------------------+---------+-------------+
+| CustomerSSNId | CustomerID | CustomerName      | Age  | Address1                  | Address2                 | City    | State       |
++---------------+------------+-------------------+------+---------------------------+--------------------------+---------+-------------+
+|      10000001 |   10000000 | Koustubh Mishra   |   22 | Plot no.51 Trupti Corner  | Ayodhya Nagar, Old MIDC  | Jalgaon | Maharashtra |
+|      10000002 |   10000001 | Ganesh Aswar      |   22 | Ram peth                  | Old Jalgaon              | Jalgaon | Maharashtra |
+|      10000003 |   10000002 | Priyanka Barpande |   22 | 144/a Ischa Nivas         | Aadarsh Nivas            | Jalgaon | Maharashtra |
+|      10000004 |   10000003 | Ankita Patil      |   22 | Plot no.10 Waman Nagar    | Pimple road              | Amalner | Maharashtra |
+|      10000005 |   10000004 | Ritesh Patil      |   22 | Plot No.1 Gulmohar colony | Behind St. Joseph School | Jalgaon | Maharashtra |
++---------------+------------+-------------------+------+---------------------------+--------------------------+---------+-------------+
+
+Accounts table entry
+table countains account details of every customer
+mysql> select * from Accounts;
++-----------+---------------+-----------------+----------------+---------------------+---------+
+| AccountId | CustomerSSNId | AccountType     | DepositeAmount | AccountCreated      | Balance |
++-----------+---------------+-----------------+----------------+---------------------+---------+
+|   1000000 |      10000001 | Current Account |       5000.000 | 2020-06-18 12:33:12 | 5000.00 |
+|   1000001 |      10000003 | Current Account |       3000.000 | 2020-06-18 12:33:12 | 3000.00 |
+|   1000002 |      10000002 | Savings Account |       4000.000 | 2020-06-18 12:33:12 | 4000.00 |
++-----------+---------------+-----------------+----------------+---------------------+---------+
+
+AccounStatus table entry
+table countains the details of account created of existing customer
+mysql> select * from AccountStatus;
++---------------+-----------+-----------------+---------------+--------------------------------+---------------------+
+| CustomerSSNId | AccountId | AccountType     | AccountStatus | Message                        | LastUpdated         |
++---------------+-----------+-----------------+---------------+--------------------------------+---------------------+
+|      10000001 |   1000000 | Current Account | Active        | Account Created Successfully.. | 2020-06-18 14:11:29 |
+|      10000002 |   1000002 | Savings Account | Active        | Account Created Successfully.. | 2020-06-18 14:12:10 |
+|      10000003 |   1000001 | Current Account | Active        | Account Created Successfully.. | 2020-06-18 14:11:58 |
+|      10000004 |         0 |                 | Pending       | Customer Created successfully  | 2020-06-18 13:50:27 |
+|      10000005 |         0 |                 | Pending       | Customer Created successfully  | 2020-06-18 13:53:35 |
++---------------+-----------+-----------------+---------------+--------------------------------+---------------------+
+
+Transactions table entry
+table countains the transactions made by customer either withdraw,deopsit or transfer
+mysql> select * from Transactions;
++---------+-------------+--------------+---------+---------------------+
+| TID     | SenderAccId | ReciverAccId | Amount  | Time                |
++---------+-------------+--------------+---------+---------------------+
+| 1000000 |           0 |      1000000 | 1000.00 | 2020-06-18 12:33:12 |
+| 1000001 |     1000002 |            0 |  500.00 | 2020-06-18 12:33:12 |
+| 1000002 |     1000000 |      1000001 | 2000.00 | 2020-06-18 12:33:12 |
++---------+-------------+--------------+---------+---------------------+
+
+
